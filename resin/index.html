@@ -1,0 +1,45 @@
+<html>
+<title>Resin Calculator</title>
+<body bgcolor=black text=white>
+<center><br><br><br><br><br><br><br><br>
+<b>Resin:</b> <input type="text" id="resina" value="0" size=2>
+<button onclick="calcula()">Calculate</button>
+<br><br><br><div id="resultado"></div>
+
+
+<script>
+function calculatempo(resinatual,resinameta){
+		minutos=(resinameta-resinatual)*8
+		tempo=new Date()
+		tempo=new Date(tempo.getTime() + minutos*60000)
+		hora=tempo.toLocaleTimeString()
+		hora=hora.split(' ').slice(0, 1).join(' ');
+		hora=hora.split(':').slice(0, 2).join(':');
+		data=tempo.toLocaleDateString()
+		data=data.split('/').slice(0, 2).join('/');
+		return "&nbsp;"+hora+" <font size=2px color=green>("+data+")</font>&nbsp;"
+}
+
+
+
+function calcula(){
+	resina=document.getElementById("resina").value
+	if (resina<0||resina>120) alert("Invalid resin number, enter a value between 1 and 120")
+	else{
+		tempo=calculatempo(resina,120)
+		out="<table border=1><tr><td align=center><b>&nbsp;Resin&nbsp;</td><td align=center><b>&nbsp;Local Time&nbsp;</td></tr>"
+		if(resina< 20) out+="<tr><td align=center><b> 20</td><td align=center>"+calculatempo(resina,20)+ "</td></tr>"		
+		if(resina< 40) out+="<tr><td align=center><b> 40</td><td align=center>"+calculatempo(resina,40)+ "</td></tr>"
+		if(resina< 60) out+="<tr><td align=center><b> 60</td><td align=center>"+calculatempo(resina,60)+ "</td></tr>"		
+		if(resina< 80) out+="<tr><td align=center><b> 80</td><td align=center>"+calculatempo(resina,80)+ "</td></tr>"		
+		if(resina<100) out+="<tr><td align=center><b>100</td><td align=center>"+calculatempo(resina,100)+"</td></tr>"		
+		if(resina<120) out+="<tr><td align=center><b>120</td><td align=center>"+calculatempo(resina,120)+"</td></tr>"		
+		out+="</table>"
+		document.getElementById("resultado").innerHTML = out;
+	}
+}
+</script>
+
+
+</body>
+</html>
